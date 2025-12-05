@@ -1,0 +1,48 @@
+# Expected Test Results for CS3050 Lab 6
+
+## Test Case 1: Feasible Time Windows
+Input: test_feasible_nodes.csv, test_feasible_edges.csv
+Start: 1, End: 4
+Expected: Feasible path should exist
+Example valid path: 1 -> 2 -> 3 -> 4 (if time constraints allow)
+Notes:
+- Check that arrival times fall within [earliest, latest] for each node
+- Verify total distance calculation is correct
+
+## Test Case 2: Infeasible Time Windows
+Input: test_infeasible_nodes.csv, test_infeasible_edges.csv
+Start: 1, End: 4
+Expected: No feasible path
+Reason: Node 4 has time window [5,10] but requires at least 45 time units to reach
+Violations: Should report that node 4's earliest constraint cannot be satisfied
+
+## Test Case 3: Shortest Path Violates Constraints
+Input: test_shortest_violates_nodes.csv, test_shortest_violates_edges.csv
+Start: 1, End: 4
+Expected: Algorithm should NOT take shortest distance path (1->3->4)
+Reason: Path 1->3 arrives at time 10, but node 3 requires arrival in [20,30]
+Correct path: Should take 1->2->4 even though it's longer distance
+Notes: This tests that your algorithm properly respects time windows over distance
+
+## Test Case 4: Priority-Based Routing
+Input: Uses priority test file with multiple destinations
+Start: 1
+Destinations: {2: HIGH, 3: HIGH, 5: MEDIUM, 6: MEDIUM, 7: LOW}
+Expected (strict priority): Visit all HIGH nodes, then all MEDIUM, then all LOW
+Expected (threshold=0.2): May allow some reordering if distance savings > 20%
+
+## Performance Testing
+Create graphs of varying sizes (10, 50, 100, 500 nodes) to measure:
+- Runtime vs graph size
+- Nodes explored vs graph size
+- Compare theoretical O((VW + E) log(VW)) vs empirical results
+
+## Edge Cases to Test
+1. Start node = End node
+2. No path exists (disconnected graph)
+3. Multiple paths with same distance
+4. All time windows are [0, infinity] (reduces to standard Dijkstra)
+5. Very tight time windows (minimal feasible solutions)
+6. Graph with cycles
+
+TODO: Fill in actual expected outputs after implementing algorithms

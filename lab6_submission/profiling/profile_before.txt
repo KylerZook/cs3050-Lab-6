@@ -1,0 +1,58 @@
+# Profiling Results - Before Optimization
+
+## How to Generate This File
+
+Run the following command to profile your Python implementation:
+
+```bash
+python -m cProfile -o profile.stats ../src/route_planner.py ../tests/data/test_feasible_nodes.csv ../tests/data/test_feasible_edges.csv 1 4 dijkstra
+```
+
+Then analyze the results:
+
+```bash
+python -c "import pstats; p = pstats.Stats('profile.stats'); p.sort_stats('cumulative'); p.print_stats(20)"
+```
+
+Or for a more detailed view:
+
+```bash
+python -c "import pstats; p = pstats.Stats('profile.stats'); p.sort_stats('time'); p.print_stats(20)"
+```
+
+## Example Output Format
+
+```
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.500    0.500 route_planner.py:1(<module>)
+      100    0.250    0.003    0.450    0.005 route_planner.py:150(dijkstra_with_time_windows)
+      500    0.100    0.000    0.100    0.000 {method 'heappop' of 'heapq'}
+      ...
+```
+
+## TODO: Identify the Bottleneck
+
+After running profiling, answer:
+1. Which function takes the most cumulative time?
+2. Which function is called most frequently?
+3. What is the bottleneck operation?
+   - Priority queue operations?
+   - State duplication checks?
+   - Path reconstruction?
+   - Other?
+
+## Placeholder Results
+
+TODO: Replace this with actual profiling output from your implementation
+
+Expected bottleneck areas:
+- Priority queue insertions/deletions (heappush/heappop)
+- State visited checks (set lookups)
+- Neighbor exploration loops
+- Time window validation checks
+
+Record baseline performance metrics:
+- Total runtime: ___ ms
+- Number of calls to heappush: ___
+- Number of calls to heappop: ___
+- Time spent in main loop: ___ ms

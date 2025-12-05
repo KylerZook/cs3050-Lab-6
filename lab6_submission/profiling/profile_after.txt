@@ -1,0 +1,46 @@
+# Profiling Results - After Optimization
+
+## Optimizations Applied
+
+TODO: Document what you changed
+
+Example optimizations to consider:
+1. Better data structure for visited states
+   - Before: set of tuples
+   - After: dictionary with custom key
+2. Reduce redundant computations
+   - Before: Recalculating time windows on each visit
+   - After: Cache time window checks
+3. More efficient priority queue
+   - Before: heapq with tuple comparison
+   - After: heapq with custom State class
+
+## Performance Improvement
+
+TODO: Fill in actual measurements
+
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| Total runtime | ___ ms | ___ ms | __% |
+| heappush calls | ___ | ___ | __% |
+| heappop calls | ___ | ___ | __% |
+| Memory usage | ___ MB | ___ MB | __% |
+
+## Profiling Output After Optimization
+
+TODO: Paste actual cProfile output here
+
+Expected improvements:
+- Reduced time in bottleneck function
+- Fewer unnecessary function calls
+- Better cache hit rates (if applicable)
+
+## Goal: At Least 20% Speedup
+
+Target: If baseline was 100ms, optimized should be ≤80ms
+
+If you cannot achieve 20%:
+- Document what you tried
+- Explain why it didn't work
+- Discuss alternative approaches
+- Partial credit available for well-reasoned attempts
